@@ -1,25 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class changeScene : MonoBehaviour
 {
-    [SerializeField] private Transform _interactionPoint;
-    [SerializeField] private float _interactionPointRadius = 0.5f;
-    [SerializeField] private LayerMask _interactableMask;
+    public string scene;
 
-    private readonly Collider[] _colliders = new Collider[3];
-    [SerializeField] private int _numFound;
+    private float timer;
 
-    // Start is called before the first frame update
-    void Start()
+    void OnTriggerEnter(Collider other)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        _numFound = Physics.OverlapSphereNonAlloc(_interactionPoint.position, _interactionPointRadius, _colliders, _interactableMask);
+        if (other.CompareTag("Player"))
+        {
+            timer = GameObject.Find("FirstPersonController").GetComponent<Clock>().timer;
+            Debug.Log("Completed in " + timer.ToString() + " seconds.");
+            SceneManager.LoadScene(scene);
+        }
     }
 }
