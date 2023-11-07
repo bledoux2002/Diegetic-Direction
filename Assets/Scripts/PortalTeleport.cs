@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Debug = UnityEngine.Debug;
 
-public class changeScene : MonoBehaviour
+public class PortalTeleport : MonoBehaviour
 {
     public string scene;
 
@@ -18,7 +18,7 @@ public class changeScene : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            player = GameObject.Find("FirstPersonController");
+            player = GameObject.FindWithTag("Player");
             timer = player.GetComponent<Clock>().timer;
             sceneName = SceneManager.GetActiveScene().name;
             Debug.Log("Completed in " + timer.ToString() + " seconds.");
