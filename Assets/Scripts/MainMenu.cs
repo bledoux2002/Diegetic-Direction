@@ -7,6 +7,17 @@ public class MainMenu : MonoBehaviour
 {
     public string scene;
 
+    [HideInInspector]
+    public static List<string> scenes = new List<string>();
+
+    void Awake()
+    {
+        scenes.Add("Landmark");
+        scenes.Add("Light");
+        scenes.Add("Path");
+        scenes.Add("Terrain");
+    }
+
     public void StartGame()
     {
         SceneManager.LoadScene(scene);
