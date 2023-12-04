@@ -15,6 +15,7 @@ public class Clock : MonoBehaviour
     [HideInInspector]
     //public string sceneName;
     public float timer;
+    public float sprintTime;
 
     // Start is called before the first frame update
     void Start()
@@ -22,12 +23,17 @@ public class Clock : MonoBehaviour
         if (DataLogFile.Length == 0) DataLogFile = Application.persistentDataPath + "/Log.txt";
         //sceneName = SceneManager.;
         timer = 0f;
+        sprintTime = 0f;
     }
 
     // Update is called once per frame
     void Update()
     {
         timer += Time.deltaTime;
+        if (Input.GetKey("left shift"))
+        {
+            sprintTime += Time.deltaTime;
+        }
     }
 
     /*

@@ -70,14 +70,14 @@ public class PlayerController : MonoBehaviour
 
             // Sprinting
             //will have to make mroe complicated for crouch function, either swap ternary conditionals for if elif statements or more complex ternary conds
-            bool isSprinting = Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.LeftControl);
+            bool isSprinting = Input.GetButton("Jump");
             float curSpeedX = canMove ? (isSprinting ? sprintSpeed : walkSpeed) * Input.GetAxis("Vertical") : 0; // bool ? if true (bool ? if true sprinting: if false walking) * W/S key : if false no movement
             float curSpeedY = canMove ? (isSprinting ? sprintSpeed : walkSpeed) * Input.GetAxis("Horizontal") : 0; // "ternary conditional operator ?:
             float moveDirY = moveDir.y;
             moveDir = (forward * curSpeedX) + (right * curSpeedY);
 
             // Jumping
-            if (Input.GetButton("Jump") && canMove && charCtrl.isGrounded)
+            if (Input.GetKey(KeyCode.JoystickButton0) && canMove && charCtrl.isGrounded)
             {
                 moveDir.y = jumpForce;
             }

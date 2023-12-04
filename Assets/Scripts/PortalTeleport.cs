@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Debug = UnityEngine.Debug;
@@ -14,6 +15,7 @@ public class PortalTeleport : MonoBehaviour
     //variables from clock
     private GameObject player;
     private float timer;
+    private float sprintTime;
     private string sceneName;
 
     void OnTriggerEnter(Collider other)
@@ -24,9 +26,10 @@ public class PortalTeleport : MonoBehaviour
             if (scene != "null")
             {
                 timer = player.GetComponent<Clock>().timer;
+                sprintTime = player.GetComponent<Clock>().sprintTime;
                 sceneName = SceneManager.GetActiveScene().name;
-                Debug.Log("Completed in " + timer.ToString() + " seconds.");
-                player.GetComponent<Clock>().Log(sceneName + ": " + timer + "\n");
+                Debug.Log("Completed in " + timer.ToString() + " seconds, sprinting for " + sprintTime.ToString() + " seconds.");
+                player.GetComponent<Clock>().Log(sceneName + ": " + timer + ", " + sprintTime + "\n");
                 SceneManager.LoadScene(scene);
             } else if (MainMenu.scenes.Count == 0)
             {
